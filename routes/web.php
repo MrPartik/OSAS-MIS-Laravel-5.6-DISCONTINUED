@@ -19,5 +19,13 @@
 //Admin
 //Route::get('/Admin/AcademicYear','homeController@index');
 Route::get('/Admin/AccreditationRequirement','Admin_AccreditationRequirement@index');
+Route::post('/Admin/Insert_AccreditationRequirement','Admin_AccreditationRequirement@store');
+//Route::post('/Admin/Insert_AccreditationRequirement',function(){
+//    if(Request::ajax()){
+//        return var_dump(Response::json(Request::all()));
+//        
+//    }
+//});
+
 //Route::get('/Insert_AccreditationRequirement','Admin_AccreditationRequirement');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Accreditation_Requirement;
 use DB;
 class Admin_AccreditationRequirement extends Controller
 {
@@ -14,8 +15,8 @@ class Admin_AccreditationRequirement extends Controller
     
     public function index()
     {
-        $list = DB::table('r_org_accreditation_details')
-        ->select('OrgAccrDetail_CODE', 'OrgAccrDetail_NAME', 'OrgAccrDetail_DESC', 'OrgAccrDetail_DISPLAY_STAT');
+//        $list = DB::table('r_org_accreditation_details')->get();
+        $list = Accreditation_Requirement::all();
         return view('Admin.AccreditationRequirement', ['list' => $list]);
     }
     
@@ -26,7 +27,7 @@ class Admin_AccreditationRequirement extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.AccreditationRequirement.blade');
     }
 
     /**
@@ -37,7 +38,26 @@ class Admin_AccreditationRequirement extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this -> validate($request, ['txtname' => 'required','txtdesc' => 'required' ]);
+        
+        $post = new Accreditation_Requirement;
+        
+        $getcode = DB::table('r_org_accreditation_details')->select(DB::raw("CONCAT('REQ',RIGHT(100000+count(OrgAccrDetail_ID)+1,5)) AS CODE"))->get();
+        foreach ($getcode as $code) {
+            $post -> OrgAccrDetail_CODE = $code->CODE;
+
+        }
+        $post -> OrgAccrDetail_NAME = $request->input('txtname');
+        $post -> OrgAccrDetail_DESC = $request->input('txtdesc');
+        $post -> save();
+        return redirect('/Admin/AccreditationRequirement')->with('success','Record Submitted');
+        
+//        print_r($request->input('txtreqdesc'));
+//        print_r($request->input('txtreqname'));
+//        return $getcode;
+//        $data = $request->all();
+//        AccreditationRequirement::create($data);
+//        $session
     }
 
     /**

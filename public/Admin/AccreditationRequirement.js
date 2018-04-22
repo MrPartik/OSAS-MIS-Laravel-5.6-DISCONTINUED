@@ -90,13 +90,13 @@ var EditableTable = function () {
 
                 var txtreqname = document.getElementById("txtreqname").value;
                 var txtreqdesc = document.getElementById("txtreqdesc").value;
-                var latcode = document.getElementById("latcode").innerText;
+//                var latcode = document.getElementById("latcode").innerText;
                 $("#close").click()
 
 
                 swal({
                         title: "Are you sure?",
-                        text: "The record will be save and will be use for Designated Office",
+                        text: "The record will be save and will be use for further transaction",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: '#DD6B55',
@@ -109,7 +109,7 @@ var EditableTable = function () {
                         if (isConfirm) {
                             $.ajax({
                                 type: 'post',
-                                url: 'OrganizationSetup/AccreditationRequirement/Add-ajax.php',
+                                url: '/Admin/Insert_AccreditationRequirement',
                                 data: {
                                     _name: txtreqname,
                                     _desc: txtreqdesc

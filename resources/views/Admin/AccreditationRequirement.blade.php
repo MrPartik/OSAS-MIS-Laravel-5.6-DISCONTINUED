@@ -40,7 +40,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                                                   
+                                            @foreach ($list as $row)
+                                                <tr>
+                                                    <td>{{ $row->OrgAccrDetail_CODE }}</td>                                                  
+                                                    <td>{{ $row->OrgAccrDetail_NAME }}</td>                                                  
+                                                    <td>{{ $row->OrgAccrDetail_DESC }}</td>
+                                                    @if($row->OrgAccrDetail_DISPLAY_STAT == 'Active')
+                                                        <td style='width:180px'>
+                                                            <center>
+                                                                <a class='btn btn-success edit' href='javascript:;'><i class='fa fa-edit'></i></a>
+                                                                <a class='btn btn-danger delete' href='javascript:;'><i class='fa fa-rotate-right'></i></a>	
+                                                            </center>
+                                                        </td>                                                      
+                                                    @else
+                                                        <td style='width:180px'>
+                                                            <center>
+                                                                <a class='btn btn-info retrieve' href='javascript:;'><i class='fa fa-rotate-left'></i></a>	
+                                                            </center>
+                                                        </td>
+                                                    @endif
+                                                          
+                                                    
+                                                    
+                                              </tr>
+                                            @endforeach                                                                                   
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -54,6 +77,9 @@
                                 </div>
                             </div>
                         </section>
+                        @include('Messages.Messages')
+                        <a id="add-without-image" class="btn btn-info  btn-sm" href="javascript:;">Imageless</a>
+
                     </div>
                 </div>
                 <!-- page end-->
@@ -91,32 +117,52 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Add Accreditation Requirement</h4>
                 </div>
-                <div class="modal-body">
-                    <form method="post" id="form-data" action="/Admin/AccreditationRequirement">
-                        {{csrf_field()}}
-                        <fieldset>
-                            <div class="row" style="padding-left:15px;padding-top:10px">
-                                <div class="col-lg-6">
-                                    Accreditation Requirement Name <input type="text" class="form-control"  placeholder="ex. Organization Name" id="txtreqname">
-                                </div>
-                                <div class="col-lg-8 " style="padding-top:10px">
-                                    Accreditation Requirement Description<textarea class="form-control" placeholder="ex. Every organization must have unique name" rows="6" style="margin: 0px 202.5px 0px 0px;resize:none" id="txtreqdesc"></textarea>
-                                </div>
-                            </div>                        
-                        </fieldset>                            
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" id="close" type="button">Close</button>
-                    <button class="btn btn-success " id="submit-data" type="submit">Save</button>
-                </div>
+                {!! Form::open(['action' => 'Admin_AccreditationRequirement@store','method' => 'post' ]) !!}
+                    <div class="modal-body">
+                        {{Form::label('title','Accreditation Requirement Name')}}
+                        {{Form::text('txtname','',['class' => 'form-control', 'placeholder' => 'ex. Organization Name' ])}}
+                        {{Form::label('title','Accreditation Requirement Description')}}
+                        {{Form::textarea('txtdesc','',['style' => 'margin: 0px 202.5px 0px 0px;resize:none','rows' => '6','class' => 'form-control', 'placeholder' => 'ex. Every organization must have unique name' ])}}
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" id="close" type="button">Close</button>
+                        {{Form::Submit('Save',['class' => 'btn btn-success' ])}}
+                    </div>
+                
+                {!! Form::close() !!}
+                
+                
+<!--
+                <form method="post" id="form-data" action="{{URL::to('/Admin/Insert_AccreditationRequirement')}}">
+                    <div class="modal-body">
+                            {{csrf_field()}}                        
+                            <fieldset>
+                                <div class="row" style="padding-left:15px;padding-top:10px">
+                                    <div class="col-lg-6">
+                                        Accreditation Requirement Name <input type="text" class="form-control"  placeholder="ex. Organization Name" name='txtreqname' id="txtreqname">
+                                    </div>
+                                    <div class="col-lg-8 " style="padding-top:10px">
+                                        Accreditation Requirement Description<textarea class="form-control" placeholder="ex. Every organization must have unique name" rows="6" style="margin: 0px 202.5px 0px 0px;resize:none" name="txtreqdesc" id="txtreqdesc"></textarea>
+                                    </div>
+                                </div>                        
+                            </fieldset>                            
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" id="close" type="button">Close</button>
+                        <button class="btn btn-success " id="submit-data" type="submit">Save</button>
+                    </div>
+                </form>
+-->
             </div>
         </div>
     </div>
+    @include('Layout.DefaultFooterLinks')    
     <script src="{{asset('Admin/AccreditationRequirement.js')}}"></script>
     <script>
+        
         jQuery(document).ready(function() {
             EditableTable.init();
+                        
         });
 
     </script>

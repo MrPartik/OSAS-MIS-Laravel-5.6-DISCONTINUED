@@ -81,7 +81,7 @@ var Gritter = function () {
 
         $.gritter.add({
             // (string | mandatory) the heading of the notification
-            title: 'This is a notice without an image!',
+            title: 'Success',
             // (string | mandatory) the text inside the notification
             text: 'This will fade out after a certain amount of time. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" style="color:#ccc">magnis dis parturient</a> montes, nascetur ridiculus mus.'
         });

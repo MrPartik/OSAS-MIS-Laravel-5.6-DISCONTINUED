@@ -37,3 +37,5 @@
 
 <script type="text/javascript" src="{{asset('js/data-tables/jquery.dataTables.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/data-tables/DT_bootstrap.js')}}"></script>        
+<script type="text/javascript" src="{{asset('js/gritter/js/jquery.gritter.js')}}"></script>    
+<script type="text/javascript" src="{{asset('js/gritter.js')}}"></script>    
