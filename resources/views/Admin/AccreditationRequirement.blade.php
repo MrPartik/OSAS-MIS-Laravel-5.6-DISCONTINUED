@@ -40,14 +40,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($list as $row)
-                                                <tr >
-                                                  <td>{{ $row->OrgAccrDetail_CODE }}</td>
-                                                  <td>{{ $row->OrgAccrDetail_NAME }}</td>
-                                                  <td>{{ $row->OrgAccrDetail_DESC }}</td>
-                                                  <td>{{ $row->OrgAccrDetail_DISPLAY_STAT }}</td>
-                                              </tr>
-                                            @endforeach                                            
+                                                                                   
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -120,7 +113,7 @@
             </div>
         </div>
     </div>
-    <script src="/Admin/AccreditationRequirement.js"></script>
+    <script src="{{asset('Admin/AccreditationRequirement.js')}}"></script>
     <script>
         jQuery(document).ready(function() {
             EditableTable.init();
